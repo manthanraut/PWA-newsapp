@@ -1,4 +1,4 @@
-var doCache = true;
+var doCache = false;
 
 // Name our cache
 var CACHE_NAME = 'my-pwa-cache-v1';

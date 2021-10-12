@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="preconnect" href="https://fonts.gstatic.com">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital@1&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/css/style.css">
         <!-- Add manifest -->
@@ -22,18 +23,44 @@
 </head>
 
 <body>
-   
-    <div class="news-container ">
-        <div class="news">
+   <div id="container">
+     <button class="btn btn-danger" id="btnflex">FLEX</button>
+     <button class="btn btn-danger" id="btngrid">GRID</button>
+   </div>
+   <div class="news-container-flex" id="flex-container">
+    <div class="news-flex">
+
+        <% articles.forEach(function(article,index){ %>
+
+            <% if ((typeof article.url=='object') || (typeof article.title=='object') || (typeof article.urlToImage=='object') || (typeof article.content=='object')){ %>
+                <% } else{ %>
+                    <!--<a href="<%- article.url %>" target="_blank" class="news-box">-->
+                        <a href="/<%- article.id %>" class="news-box-flex">
+                        <img src="<%- article.urlToImage %>" alt="Image" id="img-flex">
+                        <b><h3 style="font-size:25px;font-family:'Ultra';text-decoration:bold;text-transform: capitalize;font-weight: bold;">
+                            <%- article.title %>
+                        </h3></b>
+                        <p>
+                            <%- article.content %>
+                        </p>
+                        <br>
+                    
+                    </a>
+                    <% } %>
+                    <% }) %>
+    </div>
+</div>
+    <div class="news-container-grid" id="grid-container">
+        <div class="news-grid">
 
             <% articles.forEach(function(article,index){ %>
 
                 <% if ((typeof article.url=='object') || (typeof article.title=='object') || (typeof article.urlToImage=='object') || (typeof article.content=='object')){ %>
                     <% } else{ %>
                         <!--<a href="<%- article.url %>" target="_blank" class="news-box">-->
-                            <a href="/<%- article.id %>" class="news-box">
+                            <a href="/<%- article.id %>" class="news-box-grid">
                             <img src="<%- article.urlToImage %>" alt="Image">
-                            <b><h3 style="font-size:25px;font-family:'Ultra';text-decoration:bold;text-transform: capitalize;font-weight: bold;">
+                            <b><h3 style="font-size:25px;margin-top:20px;font-family:'Ultra';text-decoration:bold;text-transform: capitalize;font-weight: bold;">
                                 <%- article.title %>
                             </h3></b>
                             <p>
@@ -66,6 +93,30 @@
     } else {
       console.log('service worker is not supported');
     }
+  </script>
+  <script>
+    function getStyle(className, name)
+{
+    var element = document.getElementsByClassName(className);
+    return element.currentStyle ? element.currentStyle[name] : window.getComputedStyle ? window.getComputedStyle(element, null).getPropertyValue(name) : null;
+}
+var display = getStyle('news-container-flex', 'display');
+    var displayFlex=document.querySelector(".news-container-flex").style.display;
+    var displayGrid=document.querySelector(".news-container-grid").style.display;
+    console.log(display)
+    /*$(function() {
+      $('#btnflex').click(function() {
+          $('#flex-container').show();
+          $('#grid-container').hide();
+          console.log("btnflex")
+      });
+      $('#btngrid').click(function() {
+        $('#flex-container').hide();
+          $('#grid-container').show();
+          console.log("btngrid")
+      });
+    })*/
+  
   </script>
 </body>
 
