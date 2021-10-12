@@ -19,7 +19,7 @@ app.set('view engine','ejs')
 app.use(bodyParser.urlencoded({extended:true}))
 app.use('/',require('./routes/news'))
 
-
+/*HELLO MANTHAN*/
 
 app.set('views','./views')
 //console.log(`http://newsapi.org/v2/top-headlines?country=in&apiKey=${process.env.API_KEY}`)
